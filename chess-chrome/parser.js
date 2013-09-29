@@ -36,7 +36,7 @@ function get_number_reverse(pos, bside) {
 }
 
 $("#CHESS_SETTINGS_START").click(function() {
-	alert('prepare for awesomeness');
+	//alert('prepare for awesomeness');
 	//$('body').bind('DOMSubtreeModified', function() {
 		// find out whether i am top or bottom
 		var mySide = $(".plyrb:contains('electrocuter')").attr('id');
@@ -94,12 +94,13 @@ $("#CHESS_SETTINGS_START").click(function() {
 			} else {
 				combined = sq1 + finalPos;
 			}
-			alert('adding move ' + combined);
-			$.get('http://localhost:5000/addmove', {move: combined});
+			$.get('http://localhost:5000/addmove', {move: combined}, function() {
+				alert('added move ' + combined);
+				// when adding move returns
+				$.get('http://localhost:5000/makemove?');
+			});
 
-			// make move ... done
-			$.get('http://localhost:5000/makemove?');
-			//moved = true;
+			
 		}
 
 		

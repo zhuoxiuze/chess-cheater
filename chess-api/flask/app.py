@@ -36,8 +36,11 @@ def setPosition():
 @app.route('/addmove', methods=['GET'])
 def addMove():
 	print('adding a move')
-	print('the move is',request.args['move'])
-	moves.append(request.args['move'])
+	the_move = request.args['move']
+	if len(moves) > 0 and moves[len(moves) - 1] == the_move:
+		return "Already added"
+	print('the move is',the_move)
+	moves.append(the_move)
 	print('moves looks like [',', '.join(moves),']')
 	return "Success"
 
@@ -62,7 +65,7 @@ def makeMove():
 	secondY = boardTop + amount_to_shift / 2 + amount_to_shift * (8 - numberAsCharToNumber(best_move[3]))
 
 	click2(int(firstX), int(firstY))
-	time.sleep(1)
+	time.sleep(0.3)
 	click2(int(secondX), int(secondY))
 	moves.append(best_move)
 	return best_move

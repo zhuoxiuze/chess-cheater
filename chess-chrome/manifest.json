@@ -11,5 +11,9 @@
       "js": ["jquery.js", "parser.js"],
       "run_at": "document_end"
     }
+  ],
+  "permissions": [
+    "<all_urls>"
   ]
+
 }
