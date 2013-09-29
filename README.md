@@ -1,6 +1,9 @@
 # CHESS CHEATER
 Do you suck at chess? Do you find yourself on chess.com/livechess losing all the time? **CHESS CHEATER** can help! **CHESS CHEATER** will analyze the chess board and play grandmaster-level chess for you!
 
+## Awards and Accolades
+Winner of the "Most Awesome But Useless" category at Cal's 2013 HackJam!
+
 ## How it works
 I built this in a few hours at HackJam 2013. It's quite buggy and quite hacked together. Translation: it crashes about halfway into every chess game.
 
