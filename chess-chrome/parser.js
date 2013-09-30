@@ -26,7 +26,13 @@ function get_number_reverse(pos, bside) {
 	return 9 - get_number(pos, bside);
 }
 
-$("#CHESS_SETTINGS_START").click(function() {
+$('body').keyup(function(e){
+   if(e.keyCode == 32){
+       pwn();
+   }
+});
+
+function pwn() {
 	var username = $('#layout_top_username .chess_com_username_link').text();
 
 	// Am I top or bottom?
@@ -87,6 +93,10 @@ $("#CHESS_SETTINGS_START").click(function() {
 	} else {
 		status("You are " + mySide + " but it is " + currSide + "'s turn");
 	}
+}
+
+$("#CHESS_SETTINGS_START").click(function() {
+	pwn();
 			
 });
 
