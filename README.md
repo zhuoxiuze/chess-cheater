@@ -1,11 +1,14 @@
 # CHESS CHEATER
 Do you suck at chess? Do you find yourself on chess.com/livechess losing all the time? **CHESS CHEATER** can help! **CHESS CHEATER** will analyze the chess board and play grandmaster-level chess for you!
 
+## Video Demo
+[Check it out on YouTube.](http://www.youtube.com/watch?v=p0AX-XSCLIk)
+
 ## Awards and Accolades
 Winner of the "Most Awesome But Useless" category at Cal's 2013 HackJam!
 
 ## How it works
-I built this in a few hours at HackJam 2013. It's quite buggy and quite hacked together. Translation: it crashes about halfway into every chess game.
+I built this in a few hours at HackJam 2013. It's quite buggy and quite hacked together.
 
 There are 3 parts to **CHESS CHEATER**: the Chrome extension, the server application, and the chess engine.
 
@@ -16,7 +19,7 @@ The server, written in Python and Flask, receives a notification to move. It spr
 The engine is the fabulous open source [Stockfish chess engine](http://stockfishchess.org/).
 
 ## Set it up
-As this was built during a hackathon, it's very finicky. You'll need to be using Google Chrome, Windows, Python, and Flask. Clone this repo, run the server using `python app.py`, install the Chrome extension under `chrome://extensions`, and you should be good to go. Except it may fail unexpectedly in the middle of a game.
+As this was built during a hackathon, it's very finicky. You'll need to be using Google Chrome, Windows, Python, and Flask. Clone this repo, run the server using `python app.py`, install the Chrome extension under `chrome://extensions`, and you should be good to go.
 
 ## License
 GPLv3.
