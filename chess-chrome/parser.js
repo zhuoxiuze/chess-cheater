@@ -1,9 +1,11 @@
 var controlpanel = '<div id="CHESS_SETTINGS">\
-<h1>Chess Cheater Deluxe Pro Alpha</h1>\
-<a href="#" id="CHESS_SETTINGS_START">Auto-Move</a>\
-<a href="#" id="CHESS_SETTINGS_RESET">Clear Move History</a>\
+<h1>Chess Cheater Deluxe Pro Ultimate</h1>\
+<a href="#" id="CHESS_SETTINGS_START">Start Auto-Pwn</a>\
+<a href="#" id="CHESS_SETTINGS_RESET">Stop and Clear</a>\
 <p>Status Text</p>\
 </div>';
+var autopwn = false;
+var moved = false;
 
 $('body').append(controlpanel);
 
@@ -28,11 +30,19 @@ function get_number_reverse(pos, bside) {
 
 $('body').keyup(function(e){
    if(e.keyCode == 32){
-       pwn();
+       autopwn = true;
    }
 });
 
+window.setInterval(function(){
+	pwn();
+}, 100);
+
 function pwn() {
+	if (!autopwn) {
+		return;
+	}
+
 	var username = $('#layout_top_username .chess_com_username_link').text();
 
 	// Am I top or bottom?
@@ -40,6 +50,16 @@ function pwn() {
 	var currSide = $('.timerin.active').parent().attr('id');
 
 	if (mySide == currSide) {
+		if (moved) {
+			return;
+		}
+		// my turn
+		moved = true;
+
+		// set color
+		$('#CHESS_SETTINGS').addClass('compute');
+		$('#CHESS_SETTINGS').removeClass('wait');
+
 		// Board positioning
 		var btop = $('#chessboard_dummy').offset().top;
 		var bleft = $('#chessboard_dummy').offset().left;
@@ -48,14 +68,21 @@ function pwn() {
 			boardLeft: bleft,
 			boardSide: bside});
 
+		// Is it the first move?
+		if ($('.notationVertical').length == 0) {
+			$.get('http://localhost:5000/makemove?', function() {
+				status('Made the first move');
+			});
+			return;
+		}
+
 		// The yellow squares
 		var squares = $('div').filter(function() {
 			return $(this).css('border') == '3px solid rgb(255, 255, 51)';
 		});
 		if (squares.length != 2) {
-			$.get('http://localhost:5000/makemove?', function() {
-				status('Made the first move');
-			});
+			status('Unable to detect board diff');
+			moved = false;
 			return;
 		}
 		var num1 = get_number_reverse(parseInt($(squares[0]).css('top')), bside);
@@ -70,9 +97,9 @@ function pwn() {
 			finalPos = finalPos.substring(0,2) + finalPos.substring(3,4).toLowerCase();
 		} else if (finalPos == "O-O" || finalPos == "O-O-O") {
 			if (sq1.indexOf("e") != -1) {
-				finalPos = sq2
+				finalPos = sq2;
 			} else {
-				finalPos = sq1
+				finalPos = sq1;
 			}
 		} else {
 			finalPos=finalPos.substring(finalPos.length - 2);
@@ -91,16 +118,25 @@ function pwn() {
 			});
 		});
 	} else {
-		status("You are " + mySide + " but it is " + currSide + "'s turn");
+		// their turn
+		moved = false;
+		$('#CHESS_SETTINGS').removeClass('compute');
+		$('#CHESS_SETTINGS').addClass('wait');
+		status("Waiting for opponent");
 	}
+
 }
 
 $("#CHESS_SETTINGS_START").click(function() {
-	pwn();
-			
+	autopwn = true;
 });
 
 $("#CHESS_SETTINGS_RESET").click(function() {
+	moved = false;
+	autopwn = false;
+	$('#CHESS_SETTINGS').removeClass('compute');
+	$('#CHESS_SETTINGS').removeClass('wait');
+
 	$.get('http://localhost:5000/clear?', function() {
 		status('Cleared');
 	});

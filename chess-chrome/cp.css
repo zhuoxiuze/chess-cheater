@@ -13,10 +13,16 @@
 	margin: 50px;
 	height: 200px;
 	width: 500px;
-	background: rgba(234,24,24,0.7);
+	background: rgba(0,0,0,0.7);
 	z-index: 100;
 	padding: 50px;
 	border-radius: 5px;
+}
+#CHESS_SETTINGS.compute {
+	background: rgba(255,0,0,1);
+}
+#CHESS_SETTINGS.wait {
+	background: rgba(0,255,0,0.7);
 }
 #CHESS_SETTINGS h1 {
 	font-size: 22px;
@@ -31,12 +37,11 @@
 	border: 1px solid white;
 	margin: 0 5px 5px 0;
 	border-radius: 5px;
-	-webkit-transition: background 0.5s ease;
+	-webkit-transition: all 0.2s ease;
 }
 #CHESS_SETTINGS a:hover {
-	background: red;
+	box-shadow: 0 0 20px white;
 }
 #CHESS_SETTINGS a:active {
-	background: pink;
-	-webkit-transition: 0s;
+	background: rgba(0,0,0,0.5);
 }

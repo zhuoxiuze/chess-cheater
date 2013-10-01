@@ -30,25 +30,21 @@ def setPosition():
 	boardTop = int(request.args['boardTop'])
 	boardLeft = int(request.args['boardLeft'])
 	boardSide = int(request.args['boardSide'])
-	print(boardTop, boardLeft, boardSide)
 	return "Success"
 
 @app.route('/addmove', methods=['GET'])
 def addMove():
-	print('adding a move')
 	the_move = request.args['move']
 	if len(moves) > 0 and moves[len(moves) - 1] == the_move:
 		return "Already added"
-	print('the move is',the_move)
+	print('Adding',the_move)
 	moves.append(the_move)
-	print('moves looks like [',', '.join(moves),']')
+	print('Moves is now [',', '.join(moves),']')
 	return "Success"
 
 @app.route('/clear', methods=['GET'])
 def clearMoves():
-	print('clearing all moves')
 	del(moves[0:len(moves)])
-	print('moves now has',len(moves),'elements')
 	return "Success"
 
 
@@ -68,6 +64,9 @@ def makeMove():
 	time.sleep(0.1)
 	click2(int(secondX), int(secondY))
 	moves.append(best_move)
+	print('making the move ' + best_move)
+	print('Moves is now [',', '.join(moves),']')
+
 	return best_move
 
 def numberAsCharToNumber(char):
