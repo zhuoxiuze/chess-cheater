@@ -17,6 +17,7 @@ boardLeft = 0
 boardSide = 0
 moves = []
 stockfish = None
+moveTime = "100"
 
 @app.route('/')
 def index():
@@ -37,9 +38,7 @@ def addMove():
 	the_move = request.args['move']
 	if len(moves) > 0 and moves[len(moves) - 1] == the_move:
 		return "Already added"
-	print('Adding',the_move)
 	moves.append(the_move)
-	print('Moves is now [',', '.join(moves),']')
 	return "Success"
 
 @app.route('/clear', methods=['GET'])
@@ -47,10 +46,15 @@ def clearMoves():
 	del(moves[0:len(moves)])
 	return "Success"
 
+@app.route('/setspeed', methods=['GET'])
+def setSpeed():
+	global moveTime
+	moveTime = request.args['time']
+	return 'movetime changed to ' + moveTime
 
 @app.route('/makemove', methods=['GET'])
 def makeMove():
-	best_move = engine.get_best_move(moves)
+	best_move, analysis = engine.get_best_move(moves, moveTime)
 	# convert to coordinates
 	amount_to_shift = boardSide // 8
 
@@ -61,13 +65,13 @@ def makeMove():
 	secondY = boardTop + amount_to_shift / 2 + amount_to_shift * (8 - numberAsCharToNumber(best_move[3]))
 
 	click2(int(firstX), int(firstY))
-	time.sleep(0.1)
+	time.sleep(0.05)
 	click2(int(secondX), int(secondY))
 	moves.append(best_move)
-	print('making the move ' + best_move)
-	print('Moves is now [',', '.join(moves),']')
 
-	return best_move
+	to_return = 'Stockfish did: ' + best_move + ' Analysis: ' + analysis
+
+	return to_return
 
 def numberAsCharToNumber(char):
 	"""

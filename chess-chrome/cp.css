@@ -10,24 +10,22 @@
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	margin: 50px;
-	height: 200px;
-	width: 500px;
+	margin: 30px;
 	background: rgba(0,0,0,0.7);
 	z-index: 100;
 	padding: 50px;
 	border-radius: 5px;
+	width: 600px;
 }
 #CHESS_SETTINGS.compute {
-	background: rgba(255,0,0,1);
+	background: rgba(255,0,0,0.7);
 }
 #CHESS_SETTINGS.wait {
-	background: rgba(0,255,0,0.7);
+	background: rgba(0,100,0,0.7);
 }
 #CHESS_SETTINGS h1 {
 	font-size: 22px;
 	font-weight: normal;
-	font-style: italic;
 }
 #CHESS_SETTINGS a {
 	font-size: 16px;
@@ -44,4 +42,7 @@
 }
 #CHESS_SETTINGS a:active {
 	background: rgba(0,0,0,0.5);
+}
+#CHESS_SETTINGS p {
+	font-size: 16px;
 }
