@@ -2,8 +2,7 @@ var controlpanel = '<div id="CHESS_SETTINGS">\
 <h1><b>CHESS CHEATER</b> Deluxe Pro Ultimate</h1>\
 <a href="#" id="CHESS_SETTINGS_START">Start Auto-Pwn</a>\
 <a href="#" id="CHESS_SETTINGS_RESET">Stop and Clear</a>\
-<a href="#" id="CHESS_SETTINGS_SLOW">2s Time</a>\
-<a href="#" id="CHESS_SETTINGS_FAST">0.1s Time</a>\
+<a href="#" id="CHESS_SETTINGS_TIME">Set Time</a>\
 <p>Press "Start Auto-Pwn"</p>\
 </div>';
 var autopwn = false;
@@ -38,7 +37,7 @@ $('body').keyup(function(e){
 
 window.setInterval(function(){
 	pwn();
-}, 100);
+}, 50);
 
 function pwn() {
 	if (!autopwn) {
@@ -144,14 +143,9 @@ $("#CHESS_SETTINGS_RESET").click(function() {
 	
 });
 
-$("#CHESS_SETTINGS_SLOW").click(function() {
-	$.get('http://localhost:5000/setspeed?', {time: "2000"}, function(data) {
-		status(data);
-	});
-})
-
-$("#CHESS_SETTINGS_FAST").click(function() {
-	$.get('http://localhost:5000/setspeed?', {time: "100"}, function(data) {
+$("#CHESS_SETTINGS_TIME").click(function() {
+	var time_entered = prompt("Enter time in milli-seconds","100")
+	$.get('http://localhost:5000/setspeed?', {time: time_entered}, function(data) {
 		status(data);
 	});
 })

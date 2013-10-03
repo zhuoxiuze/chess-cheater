@@ -50,7 +50,7 @@ def clearMoves():
 def setSpeed():
 	global moveTime
 	moveTime = request.args['time']
-	return 'movetime changed to ' + moveTime
+	return 'Time changed to ' + moveTime + ' ms'
 
 @app.route('/makemove', methods=['GET'])
 def makeMove():
@@ -65,7 +65,7 @@ def makeMove():
 	secondY = boardTop + amount_to_shift / 2 + amount_to_shift * (8 - numberAsCharToNumber(best_move[3]))
 
 	click2(int(firstX), int(firstY))
-	time.sleep(0.05)
+	time.sleep(0.025)
 	click2(int(secondX), int(secondY))
 	moves.append(best_move)
 
