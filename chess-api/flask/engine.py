@@ -1,6 +1,6 @@
 import subprocess
 
-stockfish = subprocess.Popen(["stockfish.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+stockfish = subprocess.Popen(["./stockfish-dd-64-modern"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 
 
 def get_best_move(moves_list, move_time):

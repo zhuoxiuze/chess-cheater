@@ -6,9 +6,7 @@ import ctypes
 import time
 
 def click2(x, y):
-	ctypes.windll.user32.SetCursorPos(x, y)
-	ctypes.windll.user32.mouse_event(2, 0, 0, 0,0)
-	ctypes.windll.user32.mouse_event(4, 0, 0, 0,0)
+	pass
 app = Flask(__name__)
 
 # board positions
