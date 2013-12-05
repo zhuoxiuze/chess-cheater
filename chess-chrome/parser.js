@@ -61,11 +61,14 @@ function pwn() {
 		$('#CHESS_SETTINGS').addClass('compute');
 		$('#CHESS_SETTINGS').removeClass('wait');
 
+		var topOffset = 95;
+		// topOffset is the area taken by the browser toolbar etc.
+
 		// Board positioning
 		var btop = $('#chessboard_dummy').offset().top;
 		var bleft = $('#chessboard_dummy').offset().left;
 		var bside = $('#chessboard_dummy').width();
-		$.get('http://localhost:5000/position', {boardTop: btop + 60,
+		$.get('http://localhost:5000/position', {boardTop: btop + topOffset,
 			boardLeft: bleft,
 			boardSide: bside});
 
@@ -79,7 +82,7 @@ function pwn() {
 
 		// The yellow squares
 		var squares = $('div').filter(function() {
-			return $(this).css('border') == '3px solid rgb(255, 255, 51)';
+			return $(this).css('background-color') == 'rgb(255, 255, 51)';
 		});
 		if (squares.length != 2) {
 			status('Unable to detect board diff');
