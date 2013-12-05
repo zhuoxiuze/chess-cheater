@@ -83,8 +83,9 @@ def makeMove():
 	secondX = boardLeft + amount_to_shift / 2 + letterToNumber(best_move[2]) * amount_to_shift
 	secondY = boardTop + amount_to_shift / 2 + amount_to_shift * (8 - numberAsCharToNumber(best_move[3]))
 
+	time.sleep(0.5)
 	click2(int(firstX), int(firstY))
-	time.sleep(0.025)
+	time.sleep(0.5)
 	click2(int(secondX), int(secondY))
 	moves.append(best_move)
 
