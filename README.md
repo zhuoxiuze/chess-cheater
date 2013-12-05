@@ -8,18 +8,23 @@ Do you suck at chess? Do you find yourself on chess.com/livechess losing all the
 Winner of the "Most Awesome But Useless" category at Cal's 2013 HackJam!
 
 ## How it works
-I built this in a few hours at HackJam 2013. It's quite buggy and quite hacked together.
+I built this in a few hours at HackJam 2013. It's quite hacked together.
 
 There are 3 parts to **CHESS CHEATER**: the Chrome extension, the server application, and the chess engine.
 
 The Chrome extension displays a control panel in the bottom right of the screen. When activated, it parses the chess board and notation to determine the move that just happened. Then it calls the API endpoint `/addmove`, and the server takes it from there...
 
-The server, written in Python and Flask, receives a notification to move. It springs into action, spawning a subprocess which launches a grandmaster-level chess engine to determine the best move. This takes less than a second. Then the server performs the best move automatically, by moving the mouse on the screen and dropping the piece in the right location on the board.
+The server, written in Python and Flask, receives a notification to move. It springs into action, spawning a subprocess which launches a grandmaster-level chess engine to determine the best move. Then the server performs the best move automatically, by moving the mouse on the screen and dropping the piece in the right location on the board.
 
 The engine is the fabulous open source [Stockfish chess engine](http://stockfishchess.org/).
 
+## System Requirements
+**CHESS CHEATER** works with Windows or OS X. Other things you'll need: Python, Flask, and Google Chrome.
+
 ## Set it up
-As this was built during a hackathon, it's very finicky. You'll need to be using Google Chrome, Windows, Python, and Flask. Clone this repo, run the server using `python app.py`, install the Chrome extension under `chrome://extensions`, and you should be good to go.
+On OS X? Clone this repo, run the server using `python app.py`, install the Chrome extension under `chrome://extensions`, and you should be good to go.
+
+On Windows? Follow the same steps, but you'll also need to supply an .exe file for the engine, change that string in engine.py, and uncomment the clicking function in app.py.
 
 ## License
 GPLv3.
